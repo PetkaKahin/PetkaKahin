@@ -8,8 +8,9 @@
 
 ---
 ### Мои основные проекты:
-- [Task Manager]() - Kanban доска для задач с синхронизацию в реальном времени
-- [Eloquent Redis Mirror]() - Пакет для зеркального хранения моделей и связей в Redis
+- [Task Manager](https://github.com/PetkaKahin/Task_manager) - Kanban доска для задач с синхронизацию в реальном времени
+- [Eloquent Redis Mirror](https://github.com/PetkaKahin/eloquent-redis-mirror) - Пакет для зеркального хранения моделей и связей в Redis
+- [Laravel Docker](https://github.com/PetkaKahin/Laravel_docker) - стартовый шаблон для работы с Laravel
 
 ---
 ### Мой стек:
