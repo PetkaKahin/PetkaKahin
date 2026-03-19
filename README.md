@@ -1,16 +1,29 @@
-## Hi there 👋
+## Станислав Градов
 
-<!--
-**PetkaKahin/PetkaKahin** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
+Я backend/fullstack разработчик, занимаюсь созданием веб-приложений на PHP с использованием Laravel. Фокусируюсь на понятной архитектуре, производительности и автоматизации процессов.
 
-Here are some ideas to get you started:
+Работаю как с серверной частью, так и с фронтендом. Интересуюсь высоконагруженными системами, кешированием и использованием Redis в прикладных задачах.
 
-- 🔭 I’m currently working on ...
-- 🌱 I’m currently learning ...
-- 👯 I’m looking to collaborate on ...
-- 🤔 I’m looking for help with ...
-- 💬 Ask me about ...
-- 📫 How to reach me: ...
-- 😄 Pronouns: ...
-- ⚡ Fun fact: ...
--->
+Разрабатываю собственные инструменты и пакеты, направленные на упрощение разработки и оптимизацию приложений.
+
+---
+### Мои основные проекты:
+- [Task Manager]() - Kanban доска для задач с синхронизацию в реальном времени
+- [Eloquent Redis Mirror]() - Пакет для зеркального хранения моделей и связей в Redis
+
+---
+### Мой стек:
+- **Backend:** PHP, Laravel
+- **Frontend:** Vue, Inertia.js, Pinia
+- **Real-time:** Laravel Reverb
+- **HTTP / API:** Axios
+- **Стили:** SCSS
+- **Инфраструктура:** Redis, Docker
+
+---
+### Контакты:
+- Telegram: [@CuberLocksmith](https://t.me/CuberLocksmith)
+- Email: gradik.st@gmail.com
+
+
+[![PetkaKahin github stats](https://github-readme-stats-nu-seven-34.vercel.app/api?username=PetkaKahin)](https://github.com/anuraghazra/github-readme-stats)
