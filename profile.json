@@ -1,0 +1,17 @@
+{
+  "name": "Станислав Градов",
+  "public_repositories": 14,
+  "statistics_date": "2026-10-21",
+  "statistics_source": "https://github.com/PetkaKahin?tab=repositories",
+  "stack": [
+    {"name": "BACKEND", "primary": "PHP / Laravel", "items": ["PHP", "Laravel", "PostgreSQL", "MySQL", "Redis"]},
+    {"name": "FRONTEND", "primary": "Vue 3 / TypeScript", "items": ["Vue 3", "TypeScript", "Inertia.js", "JavaScript", "SCSS"]},
+    {"name": "INFRASTRUCTURE", "primary": "Linux / Docker", "items": ["Linux", "Docker", "Nginx", "Git", "GitHub Actions"]}
+  ],
+  "projects": [
+    {"slug": "redis", "title": "ELOQUENT REDIS MIRROR", "kind": "LARAVEL PACKAGE", "url": "https://github.com/PetkaKahin/eloquent-redis-mirror", "description": ["Redis-кеширование для Eloquent.", "Связи, синхронизация и привычный API моделей."], "tags": ["PHP", "Laravel", "Redis", "Composer"], "flow": ["ELOQUENT", "CACHE", "REDIS"], "detail": ["Прозрачный слой кеширования для моделей Laravel.", "Кеширование связей и синхронизация изменений."]},
+    {"slug": "tasks", "title": "TASK MANAGER", "kind": "WEB APPLICATION", "url": "https://github.com/PetkaKahin/Task_manager", "description": ["Kanban, drag-and-drop и rich-text редактор.", "Многопользовательские проекты и адаптивный UI."], "tags": ["Laravel", "Vue 3", "Inertia.js", "Tiptap"], "flow": ["VUE 3", "INERTIA", "LARAVEL"], "detail": ["Доски задач с перетаскиванием карточек.", "Rich-text редактор на Tiptap и совместные проекты."]},
+    {"slug": "docker", "title": "LARAVEL DOCKER", "kind": "DEVELOPMENT ENVIRONMENT", "url": "https://github.com/PetkaKahin/Laravel_docker", "description": ["Готовое окружение для Laravel.", "Docker, PostgreSQL, Valkey и Reverb."], "tags": ["Laravel", "Docker", "PostgreSQL", "Vue 3"], "flow": ["APP", "DATABASE", "CACHE"], "detail": ["Окружение для разработки веб-приложений.", "Контейнеры, база данных, кеш и WebSocket-сервер."]},
+    {"slug": "cyberpunk", "title": "CYBERPUNK RED", "kind": "TABLETOP RPG / WEB APP", "url": "https://cyberpunk-red.ru/", "description": ["Веб-приложение для настольной Cyberpunk RED.", "Партии, интерактивные подсказки и правила."], "tags": ["Laravel", "Vue 3", "TTRPG", "Web App"], "flow": ["PARTIES", "CHARACTERS", "RULES"], "detail": ["Инструменты для настольной ролевой игры.", "Управление партиями и справочник правил."]}
+  ]
+}

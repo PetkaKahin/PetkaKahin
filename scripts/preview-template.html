@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="ru" data-theme="dark">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="color-scheme" content="dark light" />
+  <title>PetkaKahin — локальный предпросмотр профиля</title>
+  <style>
+    :root { color-scheme: dark; --canvas:#0d1117; --surface:#010409; --border:#3d444d; --text:#f0f6fc; --muted:#9198a1; --link:#4493f8; --code:#656c7633; --quote:#9198a1; --stripe:#151b23; }
+    [data-theme="light"] { color-scheme:light; --canvas:#fff; --surface:#f6f8fa; --border:#d1d9e0; --text:#1f2328; --muted:#59636e; --link:#0969da; --code:#818b981f; --quote:#59636e; --stripe:#f6f8fa; }
+    * { box-sizing:border-box; }
+    body { margin:0; background:var(--canvas); color:var(--text); font:14px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans",Helvetica,Arial,sans-serif; }
+    .toolbar { border-bottom:1px solid var(--border); background:var(--surface); padding:18px 28px; display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap; }
+    .identity { display:flex; align-items:center; gap:12px; font-weight:600; }
+    .identity svg { color:var(--muted); }
+    .local { color:var(--muted); border:1px solid var(--border); border-radius:12px; padding:0 8px; font-size:12px; font-weight:400; }
+    .controls { display:flex; gap:8px; flex-wrap:wrap; }
+    button { font:inherit; color:var(--text); background:var(--canvas); border:1px solid var(--border); padding:6px 12px; border-radius:6px; cursor:pointer; }
+    button:hover, button[aria-pressed="true"] { border-color:var(--muted); background:var(--stripe); }
+    button:focus-visible, a:focus-visible, summary:focus-visible { outline:2px solid var(--link); outline-offset:3px; }
+    .note { max-width:1012px; margin:22px auto 16px; padding:0 20px; color:var(--muted); font-size:12px; }
+    .frame { max-width:1012px; margin:0 auto 48px; border:1px solid var(--border); border-radius:6px; overflow:hidden; }
+    .frame.mobile { max-width:390px; }
+    .filebar { display:flex; align-items:center; gap:8px; padding:12px 24px; border-bottom:1px solid var(--border); font-size:12px; color:var(--muted); }
+    .filebar strong { color:var(--text); font-weight:600; }
+    iframe { width:100%; border:0; display:block; min-height:600px; }
+    footer { text-align:center; padding:0 20px 30px; font-size:12px; color:var(--muted); }
+    @media(max-width:680px) { .toolbar { padding:14px 16px; } .frame { margin:0 10px 30px; } .frame.mobile { margin-left:auto; margin-right:auto; max-width:min(390px,calc(100% - 20px)); } .note { padding:0 16px; } .filebar { padding:10px 16px; } }
+    @media(prefers-reduced-motion:reduce) { * { transition:none !important; } }
+  </style>
+</head>
+<body>
+  <header class="toolbar">
+    <div class="identity">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M7 5H3v14h18V5h-4M8 3h8v5H8zM7 12h10M7 16h7"/></svg>
+      <span>PetkaKahin <span aria-hidden="true">/</span> README.md</span><span class="local">local preview</span>
+    </div>
+    <div class="controls" aria-label="Настройки предпросмотра">
+      <button id="desktop" aria-pressed="true" type="button">Десктоп</button>
+      <button id="mobile" aria-pressed="false" type="button">Телефон</button>
+      <button id="theme" aria-pressed="false" type="button">Светлая тема</button>
+    </div>
+  </header>
+  <p class="note">Текст и графика из README.md. Приближённое отображение GitHub; всё открывается с диска без публикации.</p>
+  <main class="frame" id="frame">
+    <div class="filebar"><span aria-hidden="true">▤</span> <strong>PetkaKahin</strong> / README.md</div>
+    <iframe id="profile" title="Предпросмотр README профиля" scrolling="no" srcdoc=""></iframe>
+  </main>
+  <footer>Чтобы обновить предпросмотр после правок README: <code>python3 scripts/preview.py</code></footer>
+  <template id="content"><!-- PROFILE_CONTENT --></template>
+  <script>
+    const profile = document.querySelector('#profile');
+    const theme = document.querySelector('#theme');
+    const frame = document.querySelector('#frame');
+    const desktop = document.querySelector('#desktop');
+    const mobile = document.querySelector('#mobile');
+    const content = document.querySelector('#content').innerHTML;
+    const readmeStyle = `
+      :root { color-scheme:dark; --canvas:#0d1117; --border:#3d444d; --text:#f0f6fc; --muted:#9198a1; --link:#4493f8; --code:#656c7633; --stripe:#151b23; }
+      :root[data-theme="light"] { color-scheme:light; --canvas:#fff; --border:#d1d9e0; --text:#1f2328; --muted:#59636e; --link:#0969da; --code:#818b981f; --stripe:#f6f8fa; }
+      * { box-sizing:border-box; }
+      body { margin:0; padding:32px; background:var(--canvas); color:var(--text); font:16px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans",Helvetica,Arial,sans-serif; overflow-wrap:break-word; }
+      img { max-width:100%; box-sizing:content-box; }
+      picture { display:inline; }
+      body>img { display:block; margin:0 0 16px; }
+      p,blockquote,table,details { margin-top:0; margin-bottom:16px; }
+      a { color:var(--link); text-decoration:none; }
+      a:hover { text-decoration:underline; }
+      a:focus-visible,summary:focus-visible { outline:2px solid var(--link); outline-offset:3px; }
+      blockquote { padding:0 1em; color:var(--muted); border-left:.25em solid var(--border); }
+      table { border-spacing:0; border-collapse:collapse; width:100%; display:block; max-width:100%; overflow:auto; }
+      td { border:1px solid var(--border); padding:6px 13px; }
+      tr { background:var(--canvas); border-top:1px solid var(--border); }
+      tr:nth-child(2n) { background:var(--stripe); }
+      td p { margin-top:16px; }
+      td p:last-child { margin-bottom:8px; }
+      code { padding:.2em .4em; font:85%/1.5 ui-monospace,SFMono-Regular,Consolas,monospace; background:var(--code); border-radius:6px; }
+      summary { cursor:pointer; }
+      sub { font-size:12px; }
+      @media(max-width:640px) { body { padding:16px; } td { padding:6px 9px; } }
+    `;
+    profile.srcdoc = '<!doctype html><html lang="ru" data-theme="dark"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><style>' + readmeStyle + '</style></head><body>' + content + '</body></html>';
+    function resize() {
+      const doc = profile.contentDocument;
+      if (doc?.body) profile.style.height = Math.ceil(doc.body.getBoundingClientRect().height) + 'px';
+    }
+    profile.addEventListener('load', () => {
+      const doc = profile.contentDocument;
+      new ResizeObserver(resize).observe(doc.body);
+      // Fragment URLs in srcdoc otherwise resolve against the outer file URL.
+      doc.addEventListener('click', event => {
+        const link = event.target.closest('a[href^="#"]');
+        if (!link) return;
+        const name = link.getAttribute('href').slice(1);
+        const anchor = doc.getElementsByName(name)[0] || doc.getElementById(name);
+        if (anchor) { event.preventDefault(); anchor.scrollIntoView(); }
+      });
+      doc.querySelectorAll('a[href]:not([href^="#"])').forEach(link => {
+        link.target = '_blank';
+        link.rel = 'noopener noreferrer';
+      });
+      doc.querySelectorAll('img').forEach(img => img.addEventListener('load', resize));
+      doc.querySelectorAll('details').forEach(details => details.addEventListener('toggle', () => {
+        if (details.open) details.querySelectorAll('img[data-remote-src]').forEach(img => {
+          img.src = img.dataset.remoteSrc;
+          delete img.dataset.remoteSrc;
+        });
+        resize();
+      }));
+      resize();
+    });
+    function setMobile(enabled) {
+      frame.classList.toggle('mobile', enabled);
+      desktop.setAttribute('aria-pressed', String(!enabled));
+      mobile.setAttribute('aria-pressed', String(enabled));
+    }
+    desktop.addEventListener('click', () => setMobile(false));
+    mobile.addEventListener('click', () => setMobile(true));
+    theme.addEventListener('click', () => {
+      const light = document.documentElement.dataset.theme !== 'light';
+      document.documentElement.dataset.theme = light ? 'light' : 'dark';
+      profile.contentDocument.documentElement.dataset.theme = light ? 'light' : 'dark';
+      theme.textContent = light ? 'Тёмная тема' : 'Светлая тема';
+      theme.setAttribute('aria-pressed', String(light));
+    });
+  </script>
+</body>
+</html>
