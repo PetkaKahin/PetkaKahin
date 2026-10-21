@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="420" viewBox="0 0 1200 420" role="img" aria-labelledby="title desc">
+  <title id="title">Stanislav Gradov — Cyber Locksmith</title>
+  <desc id="desc">Animated neon cyberpunk terminal with the name Stanislav Gradov, backend developer, and a holographic circuit core.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#060a16"/><stop offset=".58" stop-color="#0b1223"/><stop offset="1" stop-color="#16091f"/></linearGradient>
+    <linearGradient id="line" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#00ebff"/><stop offset=".55" stop-color="#9c66ff"/><stop offset="1" stop-color="#ff3da8"/></linearGradient>
+    <linearGradient id="glass" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#0d2540" stop-opacity=".85"/><stop offset="1" stop-color="#130c2c" stop-opacity=".3"/></linearGradient>
+    <radialGradient id="aura"><stop stop-color="#24eaff" stop-opacity=".24"/><stop offset=".55" stop-color="#2d42a0" stop-opacity=".10"/><stop offset="1" stop-color="#080b17" stop-opacity="0"/></radialGradient>
+    <pattern id="grid" width="34" height="34" patternUnits="userSpaceOnUse"><path d="M34 0H0V34" fill="none" stroke="#2d3b56" stroke-width=".65" opacity=".30"/></pattern>
+    <pattern id="noise" width="8" height="8" patternUnits="userSpaceOnUse"><circle cx="1" cy="1" r=".6" fill="#5f7d9a" opacity=".35"/></pattern>
+    <filter id="glow" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="4" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    <filter id="soft" x="-70%" y="-70%" width="240%" height="240%"><feGaussianBlur stdDeviation="8"/></filter>
+    <clipPath id="panel"><rect x="13" y="13" width="1174" height="394" rx="12"/></clipPath>
+  </defs>
+  <style>
+    .mono { font-family: 'DejaVu Sans Mono', 'Consolas', 'Liberation Mono', monospace; }
+    .sans { font-family: 'DejaVu Sans', 'Arial', sans-serif; }
+    .pulse { animation: pulse 3s ease-in-out infinite; }
+    .cursor { animation: blink 1s steps(1,end) infinite; }
+    .rotate { transform-origin: 950px 206px; animation: orbit 28s linear infinite; }
+    .rotate-rev { transform-origin: 950px 206px; animation: orbit 35s linear infinite reverse; }
+    .beam { animation: sweep 7.5s linear infinite; }
+    .led { animation: led 2.6s ease-in-out infinite; }
+    @keyframes blink { 0%,49% {opacity:1} 50%,100% {opacity:0} }
+    @keyframes orbit { to {transform:rotate(360deg)} }
+    @keyframes pulse { 0%,100%{opacity:.50} 50%{opacity:1} }
+    @keyframes led { 0%,100%{opacity:.35} 50%{opacity:1} }
+    @keyframes sweep { 0%{transform:translateY(-460px)} 100%{transform:translateY(460px)} }
+    @media (prefers-reduced-motion: reduce) { * { animation: none !important; } }
+  </style>
+  <rect width="1200" height="420" rx="18" fill="#050812"/>
+  <rect x="8" y="8" width="1184" height="404" rx="14" fill="url(#bg)" stroke="#1b4560" stroke-width="1.5"/>
+  <g clip-path="url(#panel)">
+    <rect x="13" y="13" width="1174" height="394" fill="url(#grid)"/>
+    <rect x="13" y="13" width="1174" height="394" fill="url(#noise)" opacity=".2"/>
+    <circle cx="950" cy="206" r="280" fill="url(#aura)"/>
+    <path d="M0 90H1200M0 330H1200" stroke="#5e6fff" stroke-opacity=".09"/>
+    <g class="beam" opacity=".14"><rect x="12" y="12" width="1176" height="38" fill="#12eeff" filter="url(#soft)"/></g>
+    <path d="M34 99V45H88M1165 99V45H1112M34 321V375H88M1165 321V375H1112" fill="none" stroke="url(#line)" stroke-width="3"/>
+    <path d="M33 106V311M1166 106V311" stroke="#1c5570" stroke-dasharray="4 9"/>
+    <path d="M62 350h72l18-18h75M1067 68h-58l-20 20h-82" fill="none" stroke="#ed43be" stroke-width="1" opacity=".65"/>
+    <g opacity=".55"><circle cx="134" cy="350" r="3" fill="#ff45b7"/><circle cx="1008" cy="69" r="3" fill="#27edff"/></g>
+    <g class="mono" font-size="13" letter-spacing="1.8">
+      <circle cx="67" cy="70" r="5" fill="#16f5ba" class="led"/>
+      <text x="84" y="75" fill="#8cfce5">SYSTEM / ONLINE</text>
+      <text x="513" y="75" fill="#94a3c8" opacity=".85">IDENTITY://PETKAKAHIN</text>
+      <text x="1090" y="75" fill="#ff62bd" text-anchor="end">v.20.77</text>
+    </g>
+    <path d="M64 91H1137" stroke="url(#line)" opacity=".65"/>
+    <g class="sans" font-weight="800">
+      <text x="64" y="169" fill="#89a6cf" letter-spacing="5" font-size="17">HELLO, WORLD. I'M</text>
+      <text x="59" y="254" fill="#00efff" opacity=".20" font-size="78" letter-spacing="-.8">STANISLAV</text>
+      <text x="64" y="250" fill="#e9f7ff" font-size="78" letter-spacing="-.8">STANISLAV</text>
+      <text x="64" y="323" fill="#ff54b8" filter="url(#glow)" font-size="72" letter-spacing="2">GRADOV<tspan class="cursor" fill="#16efff">_</tspan></text>
+    </g>
+    <g class="mono" font-size="16">
+      <text x="66" y="358" fill="#65dfe9">&gt; PHP / LARAVEL  ·  WEB SYSTEMS  ·  BACKEND</text>
+    </g>
+    <g>
+      <circle cx="950" cy="206" r="130" fill="url(#glass)" stroke="#136b83" stroke-width="1.2"/>
+      <circle cx="950" cy="206" r="118" fill="none" stroke="#1df9ff" stroke-dasharray="4 10" opacity=".33"/>
+      <g class="rotate" fill="none" stroke="#20e6ff" stroke-width="2">
+        <circle cx="950" cy="206" r="99" stroke-dasharray="142 48 20 70 96 58" opacity=".85"/>
+        <path d="M950 101v18M950 293v18M845 206h18M1037 206h18" opacity=".9"/>
+      </g>
+      <g class="rotate-rev" fill="none" stroke="#ff47bd" stroke-width="2.7"><circle cx="950" cy="206" r="82" stroke-dasharray="30 85 110 58 30 202" opacity=".85"/></g>
+      <path d="M950 130l66 38v76l-66 38-66-38v-76z" fill="#121b31" stroke="#1cf0ff" stroke-width="1.8"/>
+      <path d="M950 154l45 26v52l-45 26-45-26v-52z" fill="none" stroke="#f149b0" opacity=".8"/>
+      <path d="M920 196l-15 12 15 12M980 196l15 12-15 12M960 188l-19 40" fill="none" stroke="#bdfaff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" filter="url(#glow)"/>
+      <circle class="pulse" cx="950" cy="206" r="69" fill="none" stroke="#47ffff" opacity=".17" stroke-width="4"/>
+      <g class="mono" font-size="11" letter-spacing="2" fill="#90b4d9"><text x="950" y="344" text-anchor="middle">CORE / ACTIVE</text></g>
+    </g>
+    <path d="M64 386H1135" stroke="#1e5678" opacity=".75"/>
+    <g class="mono" font-size="11" fill="#7085a6" letter-spacing="1.6"><text x="67" y="402">CYBER LOCKSMITH / ACCESS GRANTED</text><text x="1128" y="402" text-anchor="end">BUILD. BREAK. LEARN. REPEAT.</text></g>
+  </g>
+</svg>
