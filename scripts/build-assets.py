@@ -82,12 +82,6 @@ def heading(b, w, num, title):
           path(f'M430 40H{w-28}', BORDER), rect(w-32, 60, 5, 5, RED, 'class="led"')]
 
 
-def key(x, y, scale=1):
-    return (f'<g transform="translate({x} {y}) scale({scale}) rotate(-38 135 100)">'
-            + path('M34 26H108L140 58V132L108 164H34L2 132V58Z', WHITE, 13)
-            + path('M52 70H90V108H52Z', WHITE, 10)
-            + path('M143 95H260V120H233V151H205V120H178', WHITE, 16) + '</g>')
-
 
 def technical_motif(kind, x, y, scale=1):
     """Decorative circuit illustrations; none encode activity or skill levels."""
@@ -162,30 +156,6 @@ def technical_motif(kind, x, y, scale=1):
     return b
 
 
-def header(mobile):
-    w, h = (640, 550) if mobile else (1200, 460)
-    b = shell(w, h) + [label('PERSONNEL FILE / SG', 32, 34, 12, RED), label('BACKEND / WEB SYSTEMS', w-32, 34, 11, anchor='end'), path(f'M32 52H{w-32}', BORDER)]
-    b += [rect(32, 77, 190, 25, RED), label('BACKEND DEVELOPER', 43, 94, 11, WHITE, 1.2)]
-    if mobile:
-        b += [typepath('STANISLAV', 28, 191, 116), typepath('GRADOV', 28, 285, 136),
-              typepath(DATA['name'], 34, 330, 25, WHITE, 'Play', False), path('M34 355H606', BORDER),
-              label('PHP / LARAVEL', 34, 398, 19, WHITE, .5), label('LINUX / DOCKER', 34, 432, 15),
-              path('M466 375H583L607 399V500H466Z', RED, 0, RED), key(474, 394, .41),
-              path('M34 480H430', BORDER), label('BUILD. BREAK. UNDERSTAND.', 34, 520, 13, MUTED, .6)]
-    else:
-        b += [typepath('STANISLAV', 27, 207, 138), typepath('GRADOV', 27, 317, 154),
-              label('PHP / LARAVEL / WEB SYSTEMS', 36, 358, 16, WHITE, .8), typepath(DATA['name'], 36, 395, 20, MUTED, 'Play', False),
-              path('M797 77H1136L1166 107V354L1136 384H797Z', RED, 0, RED),
-              label('SYSTEMS / ENGINEERING', 818, 105, 11, WHITE, .8), path('M818 118H1144', WHITE, 1, extra='opacity=".3"'),
-              key(853, 143, .83), label('NO LOCK IS A DEAD END.', 818, 361, 12, WHITE), path('M755 77V384', BORDER),
-              path('M34 417H1166', BORDER), label('01 / BACKEND DEVELOPMENT', 36, 444, 11, WHITE, .4),
-              label('02 / LINUX & INFRASTRUCTURE', 434, 444, 11, MUTED, .4), label('03 / WEB APPLICATIONS', 926, 444, 11, MUTED, .4)]
-    b += [path(f'M32 52H{w-32}', RED, 1.5, extra='class="packet"')]
-    save('header-mobile.svg' if mobile else 'header.svg', w, h, f"{DATA['name']} — PHP / Laravel developer", b)
-
-
-for mobile in (False, True):
-    header(mobile)
 
 for i, (name, num, text) in enumerate([('stack', '01', 'TECH INVENTORY'), ('projects', '02', 'SELECTED WORK'), ('stats', '03', 'TELEMETRY')]):
     for mobile in (False, True):
@@ -331,21 +301,12 @@ for mobile in (False, True):
     save('timeline-mobile.svg' if mobile else 'timeline.svg', w, h,
          f'Дневная активность GitHub за 30 дней: {recent[0]["date"]} — {recent[-1]["date"]}. Сумма {sum(day["count"] for day in recent)} contributions.', b)
 
-for mobile in (False, True):
-    w, h = (640, 142) if mobile else (1200, 134)
-    b = shell(w, h) + [typepath('BUILD SYSTEMS. PICK LOCKS.', 26, 62, 34 if mobile else 38),
-        label('PHP / LARAVEL / WEB SYSTEMS', 28, 101, 12, MUTED, .5), label('EOF / 001', w-28, h-15, 11, RED, anchor='end'),
-        path(f'M28 {h-20}H{w-180}', BORDER), path(f'M28 {h-20}H{w-180}', RED, 1.5, extra='class="packet"')]
-    if not mobile:
-        b += technical_motif('index', 860, 10, .6)
-    save('footer-mobile.svg' if mobile else 'footer.svg', w, h, 'Build systems. Pick locks.', b)
-
 
 def picture(name, alt, width='100%'):
     return f'<picture><source media="(max-width: 640px)" srcset="./assets/{name}-mobile.svg" /><img src="./assets/{name}.svg" width="{width}" align="top" alt="{escape(alt, quote=True)}" /></picture>'
 
 
-readme = [picture('header', DATA['name']+' / PHP · Laravel · Web systems')]
+readme = []
 for section, title in [('stack', 'Стек'), ('projects', 'Проекты'), ('stats', 'Статистика')]:
     readme += [f'<a href="#{section}">'+picture(f'nav-{section}', f'{title} ↓', '33.333%')+'</a>']
 readme += ['<a name="stack"></a>', picture('stack', 'Стек: '+', '.join(s for g in DATA['stack'] for s in g['items'])),
@@ -358,8 +319,7 @@ readme += ['<a name="stats"></a>', f'<a href="{DATA["statistics_source"]}">',
            picture('stats', f'{DATA["public_repositories"]} публичных репозиториев · {len(DATA["projects"])} избранных проекта · {len({s for g in DATA["stack"] for s in g["items"]})} технологий · {len(DATA["stack"])} направления. Снимок на '+DATA['statistics_date']),
            '</a>', '<a name="activity"></a>',
            '<a href="https://github.com/PetkaKahin?tab=overview">', picture('activity', f'Карта активности GitHub: {total} contributions за 365 дней, {active} активных дней.'),
-           picture('timeline', 'Дневная активность за последние 30 дней. Реальные данные GitHub.'), '</a>',
-           picture('footer', 'Build systems. Pick locks.')]
+           picture('timeline', 'Дневная активность за последние 30 дней. Реальные данные GitHub.'), '</a>']
 # No whitespace or paragraph/break nodes between image slices: align=top
 # removes the inline-image baseline gap using a GitHub-supported attribute.
 (ROOT/'README.md').write_text('<!-- Generated by scripts/build-assets.py from profile.json + activity.json. -->\n<p align="center">'+''.join(readme)+'</p>\n')
