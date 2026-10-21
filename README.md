@@ -10,4 +10,4 @@
 - Email: gradik.st@gmail.com
 
 
-[![PetkaKahin github stats](https://github-readme-stats-nu-seven-34.vercel.app/api?username=PetkaKahin)](https://github.com/anuraghazra/github-readme-stats)
+[![GitHub Stats](https://github-readme-stats-nu-seven-34.vercel.app/api?username=PetkaKahin&include_all_commits=true&count_private=true&show_icons=true)](https://github.com/anuraghazra/github-readme-stats)
